@@ -1,30 +1,20 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('App contains correct heading', () => {
+// test메서드는 2개의 인자를 받는다. 첫번째는 테스트 이름을 작성하고 두번째는 실행할 함수이다. 함수에서 예외가 발생하면 실패한다.
+
+// 클릭 전의 전제 조건 테스트
+
+// 버튼이 올바른 색상으로 시작되는지 테스트(red)
+test('button starts with correct color', () => {
   render(<App />);
-  // const headingElement = screen.getByText("I'm gonna learn React Testing Library");
-  // 문자열도 가능하지만 문자열을 사용하려면 정확하게 일치하게 해야 한다.
-
-  // const headingElement = screen.getByText(/learn react/i);
-  const headingElement = screen.getByRole('heading', { name: /learn react/i });
-  // / /은 정규표현식으로 문자가 들어가기만 하면 유연하게 테스트가 통과한다.
-  // i는 대소문자 구분이 없는것을 의미한다.
-
-  expect(headingElement).toBeInTheDocument();
-  // 모두 expect 메서드로 시작하고 Vitest(jest)에서 전역 메서드이다.
-  // ()안에는 인자가 들어간다. 기대를 충족하는지 확인한다.
-  // .뒤에는 단언 유형을 나타낸다. toBeInTheDocument는 Jest-DOM에서 가져온다. ()안에 인자가 있을 수도 있다. 테스트 통과 여부를 결정하는 곳
-
-  // 예시
-  // expect(element.textContent).toBe('hello');
-  // expect(elementsArray).toHaveLength(7);
+  const buttonElement = screen.getByRole('button', { name: /blue/i }); // 단언, 액세스 할 수 있는 이름 내에 blue가 있는 버튼이 없으면 name은 해당 버튼의 경우 버튼에 표시되는 문자열
+  expect(buttonElement).toHaveClass('red');
 });
+// 초기 텍스트 찾는 테스트(blue) => { name: /blue/i }로 대체가 가능하다.
+test('button starts with correct text', () => {});
 
-// 빈 테스트
-test('empty test', () => {});
+// 클릭 후의 조건 테스트
+test('button has with correct color after click', () => {});
 
-// 실패
-test.skip('throws error explicitly', () => {
-  throw new Error('fail this test!');
-});
+test('button has correct text after click', () => {});
