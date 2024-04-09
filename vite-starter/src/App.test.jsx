@@ -1,3 +1,4 @@
+import { logRoles } from '@testing-library/react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
@@ -7,7 +8,10 @@ import App from './App';
 
 // 버튼이 올바른 색상으로 시작되는지 테스트(red)
 test('button starts with correct color', () => {
-  render(<App />);
+  const { container } = render(<App />);
+  logRoles(container);
+  // logRoles: 페이지가 크고 잘 알지 못하는 역할이 있을 때 사용한다.
+
   const buttonElement = screen.getByRole('button', { name: /blue/i }); // 단언, 액세스 할 수 있는 이름 내에 blue가 있는 버튼이 없으면 name은 해당 버튼의 경우 버튼에 표시되는 문자열
   expect(buttonElement).toHaveClass('red');
 });
